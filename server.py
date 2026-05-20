@@ -1,11 +1,13 @@
 import base64, os
 from flask import Flask, jsonify, request, send_from_directory
+from flask_cors import CORS             # 🔥 1. Import this
 from werkzeug.routing import BaseConverter
 
 class EverythingConverter(BaseConverter):
     regex = '.*'
 
 app = Flask(__name__)
+CORS(app)                               # 🔥 2. Add this one line!
 app.url_map.converters['everything'] = EverythingConverter
 
 class ProxyGenerator:
